@@ -49,17 +49,23 @@ XTab = (function (window, localStorage) {
 
 		XTab.off = function (eventName, handler)
 		{
-			if (! handler)
+			if (arguments.length)
 			{
-				handlers[eventName] = [];
+				if (arguments.length > 1)
+				{
+					createHandlers(eventName);
+					var index = handlers[eventName].indexOf(handler);
+					if (~ index)
+					{
+						handlers[eventName].splice(index, 1);
+					}
+				} else
+				{
+					handlers[eventName] = [];
+				}
 			} else
 			{
-				createHandlers(eventName);
-				var index = handlers[eventName].indexOf(handler);
-				if (~ index)
-				{
-					handlers[eventName].splice(index, 1);
-				}
+				handlers = {};
 			}
 		};
 

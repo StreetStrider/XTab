@@ -31,6 +31,7 @@ Removing handlers
 
     XTab.off('meow', handler1); // removes only handler1
     XTab.off('meow'); // removes all handlers for meow event
+    XTab.off(); // removes all handlers
 
 Once handlers
 ---
