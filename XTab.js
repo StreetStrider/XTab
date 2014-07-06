@@ -13,6 +13,7 @@ XTab = (function (window, localStorage) {
 		XTab.on = function (eventName, handler)
 		{
 			createHandlers(eventName);
+
 			handlers[eventName].push(handler);
 		};
 
@@ -35,6 +36,7 @@ XTab = (function (window, localStorage) {
 				if (arguments.length > 1)
 				{
 					createHandlers(eventName);
+
 					var index = handlers[eventName].indexOf(handler);
 					if (~ index)
 					{
@@ -52,7 +54,7 @@ XTab = (function (window, localStorage) {
 
 		function createHandlers (eventName)
 		{
-			if (! handlers[eventName]) handlers[eventName] = [];
+			handlers[eventName] || (handlers[eventName] = []);
 		}
 
 		XTab.emit = function (eventName, value)
@@ -79,6 +81,7 @@ XTab = (function (window, localStorage) {
 
 					handlers[eventName].forEach(function (handler)
 					{
+						/* conform arity */
 						if (data.value)
 						{
 							handler.call(XTab, data.value);
