@@ -1,6 +1,6 @@
 XTab
 ===
-JavaScript cross-tab events library.
+Browser cross-tab events library.
 
 Allow to emit events that will be dispatched to all other tabs from that domain opened.
 
