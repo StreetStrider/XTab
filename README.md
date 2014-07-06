@@ -1,6 +1,5 @@
 XTab
 ===
-
 JavaScript cross-tab events library.
 
 Allow to emit events that will be dispatched to all other tabs from that domain opened.
@@ -8,12 +7,9 @@ Allow to emit events that will be dispatched to all other tabs from that domain 
 Basic Usage
 ---
 ```javascript
-XTab.on('meow', function handler (cat, color) { ... });
-XTab.emit('meow', 'Boris', 'red');
+XTab.on('meow', function handler (cat) { ... });
+XTab.emit('meow', 'Boris');
 ```
-
-handler can accept any count of arguments.
-When emitting events any count of arguments can be passed.
 
 Multiple handlers
 ---

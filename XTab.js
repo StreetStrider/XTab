@@ -55,35 +55,42 @@ XTab = (function (window, localStorage) {
 			if (! handlers[eventName]) handlers[eventName] = [];
 		}
 
-		XTab.emit = function (eventName)
+		XTab.emit = function (eventName, value)
 		{
-			var args = Array.prototype.slice.call(arguments, 1);
-			localStorage.setItem(prefix + eventName, codeArgs(args));
+			var data = {};
+			if (arguments.length > 1)
+			{
+				data.value = value;
+			}
+			data.timemark = +new Date;
+
+			localStorage.setItem(prefix + eventName, JSON.stringify(data));
 		};
 
-		window.addEventListener('storage', function (e) {
-			if (e.key.substr(0, prefix.length) == prefix)
+		window.addEventListener('storage', function (e)
+		{
+			if (e.key.substr(0, prefix.length) === prefix)
 			{
 				var eventName = e.key.substr(prefix.length);
-				handlers[eventName] && handlers[eventName].forEach(function (handler) {
-					handler.apply(XTab, decodeArgs(e.newValue));
-				});
+
+				if (handlers[eventName] && handlers[eventName].length)
+				{
+					var data = JSON.parse(e.newValue);
+
+					handlers[eventName].forEach(function (handler)
+					{
+						if (data.value)
+						{
+							handler.call(XTab, data.value);
+						}
+						else
+						{
+							handler.call(XTab);
+						}
+					});
+				}
 			}
 		});
-
-		function codeArgs (args)
-		{
-			//args = Array.prototype.slice.call(args); // redundant
-			args.push(new Date().getTime());
-			return JSON.stringify(args);
-		}
-
-		function decodeArgs (value)
-		{
-			var args = JSON.parse(value);
-			args.pop();
-			return args;
-		}
 
 		return XTab;
 
