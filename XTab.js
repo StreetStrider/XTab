@@ -79,6 +79,8 @@ XTab = (function (window, localStorage) {
 				{
 					var data = JSON.parse(e.newValue);
 
+					handlers = handlers.slice();
+
 					handlers[eventName].forEach(function (handler)
 					{
 						/* conform arity */
