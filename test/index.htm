@@ -23,5 +23,11 @@
 			console.log(data);
 			area.value += JSON.stringify(data);
 		});
+
+		XTab.once('event', function (data)
+		{
+			console.log('once', data);
+			area.value += JSON.stringify(data);
+		});
 	</script>
 </html>
