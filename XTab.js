@@ -18,13 +18,13 @@ XTab = (function (window, localStorage) {
 
 		XTab.once = function (eventName, handler)
 		{
-			this.on(eventName, handler);
-			this.on(eventName, remover);
+			XTab.on(eventName, handler);
+			XTab.on(eventName, remover);
 
 			function remover ()
 			{
-				this.off(eventName, handler);
-				this.off(eventName, remover);
+				XTab.off(eventName, handler);
+				XTab.off(eventName, remover);
 			}
 		};
 
