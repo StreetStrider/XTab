@@ -1,0 +1,14 @@
+{
+	"name": "xtab-test",
+	"version": "0.0.0",
+
+	"dependencies":
+	{
+		"httpster": "latest"
+	},
+
+	"scripts":
+	{
+		"start": "httpster --dir .."
+	}
+}
